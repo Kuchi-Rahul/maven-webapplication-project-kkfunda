@@ -1,8 +1,8 @@
-pipeline{
-   triggers{
+properties([
+   pipelineTriggers([
       pollSCM('*/1 * * * *')
-   }
-}
+      ])
+   ])
 
 node
 { 
