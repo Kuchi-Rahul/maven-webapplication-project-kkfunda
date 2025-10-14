@@ -40,11 +40,7 @@ pipeline {
             }
         }
 
-        stage('Downstram Job') {
-           steps {
-               build job: 'jio-qa'
-           }
-        }   
+ 
     }
 
 }
