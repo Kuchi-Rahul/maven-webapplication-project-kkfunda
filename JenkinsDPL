@@ -38,7 +38,11 @@ pipeline {
             }
         }
 
- 
+        stage('DownStream'){
+           steps{
+               build job: 'jio-qa'
+            }
+         }
     }
 
 }
