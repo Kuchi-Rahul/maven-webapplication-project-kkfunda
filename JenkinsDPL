@@ -9,7 +9,7 @@ pipeline {
     stages{
         stage('Github') {
             steps{
-                git branch: 'Dev', url: 'https://github.com/Kuchi-Rahul/maven-webapplication-project-kkfunda.git'
+                git branch: 'jio-uat', url: 'https://github.com/Kuchi-Rahul/maven-webapplication-project-kkfunda.git'
             }
         }
 
