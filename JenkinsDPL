@@ -44,6 +44,12 @@ pipeline {
                build job: 'jio-qa'
             }
          }
+
+        stage('DoubleDownstream'){
+           steps{
+               build job: 'jio-uat'
+            }
+         }
     }
 
 }
