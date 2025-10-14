@@ -46,11 +46,7 @@ pipeline {
             }
          }
 
-        stage('DoubleDownstream'){
-           steps{
-               build job: 'jio-uat'
-            }
-         }
+       
     }
 
 }
