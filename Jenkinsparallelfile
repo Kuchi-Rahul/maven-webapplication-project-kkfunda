@@ -1,0 +1,44 @@
+node{
+    
+    def MavenVariable =tool name: 'Maven-3.8'
+    
+    stage('Build parallel-1'){
+        parallel(
+            'Github Checkout': {
+                 git branch: 'master', url: 'https://github.com/Kuchi-Rahul/maven-webapplication-project-kkfunda.git'
+            },
+            
+            'test': {
+                sh "${MavenVariable}/bin/mvn test"
+            },
+             
+            'Sonarqube': {
+                sh "${MavenVariable}/bin/mvn sonar:sonar"
+            }
+            
+            )
+       }
+            
+            stage('Parallel stage-2') {
+                parallel(
+                    'Nexus': {
+                        sh "${MavenVariable}/bin/mvn deploy"
+                    },
+                    
+                    'Tomcat': {
+                        
+                        sh """
+
+                        curl -u rahul:admin123 \
+                --upload-file /var/lib/jenkins/workspace/Maven-Scripted-Pipelines/target/maven-web-application.war \
+                       "http://localhost:8082/manager/text/deploy?path=/maven-web-application&update=true"
+          
+                         """ 
+                    },
+                    
+                    'Downstream': {
+                        build job: "jio-uat"
+                    }
+                 )
+            }
+    }
