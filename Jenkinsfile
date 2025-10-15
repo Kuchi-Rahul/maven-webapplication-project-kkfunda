@@ -60,10 +60,7 @@ sh """
        """ 
     }    
 
-      stage('Downstream')
-      {
-        build job: 'jio-uat'
-      }
+  
       
     }  //try ending
 
